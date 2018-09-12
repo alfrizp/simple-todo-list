@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Todo List</title>
+</head>
+<body>
+  <h1>Todo List</h1>
+
+  <p><strong>Insert Todo</strong></p>
+  <form id="todo-form">
+    <input type="text" name="todo" id="todo">
+  </form>
+  <button onclick="insert()" >Insert</button>
+
+  <div id="my-list">
+
+  </div>
+  
+  <script>
+
+    let myTodos = []
+
+    function insertTodo() {
+      const todoField = document.getElementById("todo")
+      const todo = todoField.value
+
+      myTodos.push({
+        name: todo,
+        isComplete: false
+      })
+
+      const appendNewList = function(dream) {
+        const newListItem = document.createElement('li');
+        newListItem.innerHTML = dream;
+        todoLists.appendChild(newListItem);
+      }
+
+      appendNewList(todo);
+
+      console.log("My List: ")
+      myTodos.forEach((data, index) => {
+        console.log(`${index}. ${data.name} (${data.isComplete ? "Done" : "Undone" })`)
+      })
+
+      todoField.value = ""
+    }
+
+    function changeStatus(index) {
+      myTodos = myTodos.map((data, idx) => {
+        return {
+          ...data,
+          isComplete: Number(index) === idx ? true : data.isComplete
+        }
+      })
+
+      console.log("My List: ")
+      myTodos.forEach((data, index) => {
+        console.log(`${index}. ${data.name} (${data.isComplete ? "Done" : "Undone" })`)
+      })
+    }
+
+    function showMyList() {
+      console.log("My List: ")
+      myTodos.forEach((data, index) => {
+        console.log(`${index}. ${data.name} (${data.isComplete ? "Done" : "Undone" })`)
+      })
+    }
+  
+    const todoLists = document.getElementById("my-list")
+    function insert() {
+      insertTodo();
+
+      // const appendNewList = function(dream) {
+      //   const newListItem = document.createElement('li');
+      //   newListItem.innerHTML = dream;
+      //   todoLists.appendChild(newListItem);
+      // }
+
+      // myTodos.forEach( function(dream) {
+      //   appendNewList(dream.name);
+      // });
+      
+    }
+  </script>
+</body>
+</html>
